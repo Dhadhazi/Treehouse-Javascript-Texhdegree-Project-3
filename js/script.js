@@ -66,24 +66,43 @@ tshirtDesign.addEventListener('change', (e) => {
     ColorChoice(e.target.value); 
 })
 
-//Checkbox appointments handling
+//Checkbox appointments, total cost handling
 const checkboxes = document.querySelectorAll('input[type=checkbox]');
+
+//Creating the running tab
+const totalBox = document.createElement('SPAN');
+const totalText = document.createTextNode("Total Payable: $0");
+totalBox.appendChild(totalText);
+document.querySelector('.activities').appendChild(totalBox);
+let totalCost = 0;
+
+//adding event listener to checkboxes
 for (let i=0; i<checkboxes.length;i++) {
   checkboxes[i].addEventListener('change', (e) => {
     const clicked = e.target;
     const clickedTime = clicked.getAttribute('data-day-and-time');
+    const clickedCost = parseInt(clicked.getAttribute('data-cost'));
+
     for (let i=0; i<checkboxes.length;i++) {
       checkboxTime = checkboxes[i].getAttribute('data-day-and-time');
       if (clickedTime === checkboxTime && checkboxes[i] !== clicked) {
         if (clicked.checked) {
-          checkboxes[i].disabled = 'true';  
+          checkboxes[i].disabled = 'true';
         } else {
           checkboxes[i].disabled = ''; 
         }
       }
-   }
+    }
+    if (clicked.checked){
+      totalCost += clickedCost;
+      totalBox.textContent ='Total: $'+ totalCost;
+    } else {
+      totalCost -= clickedCost;
+      totalBox.textContent ='Total: $'+ totalCost;
+    }
   })
 }
+
 
 //Payment section 
 const paymentOptions = document.getElementById('payment');
@@ -116,7 +135,83 @@ function pay (paymentMethod) {
 //Event listener for Payment options
 paymentOptions.addEventListener('change', (e) => {
   pay(e.target.value);
-})
+});
+
+//Form validation functions
+function nameValidator() {
+  const name = document.getElementById('name');
+  if (name.value.length > 0) {
+    return(true);
+  } else {
+    return(false);
+  }
+}
+
+function emailValidator() {
+  const email = document.getElementById('mail');
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email.value);
+}
+
+function activitiValidator(){
+  let status = false;
+  for (let i=0; i<checkboxes.length; i++) {
+    if (checkboxes[i].checked) {
+      status = true;
+    }
+  }
+  return(status);
+}
+
+function ccNumberValidator(){
+  const ccNumber = document.getElementById('cc-num');
+  const re = /^(\d){13,16}$/;
+  return re.test(ccNumber.value);
+}
+
+function ccZipValidator(){
+  const zip = document.getElementById('zip');
+  const re = /^(\d){5}$/;
+  return re.test(zip.value);
+}
+
+function ccCvvValidator(){
+  const cvv = document.getElementById('cvv');
+  const re = /^(\d){3}$/;
+  return re.test(cvv.value);
+}
+
+//Form validation event listener
+const form = document.querySelector("form");
+form.addEventListener('submit', (e) => {
+  nameValidator();
+  if (!nameValidator()) {
+    e.preventDefault();
+    console.log("Name validator prevented submission");
+  } 
+  if (!emailValidator()) {
+    e.preventDefault();
+    console.log("Email validator prevented submission");
+  } 
+  if (!activitiValidator()) {
+    e.preventDefault();
+    console.log("Activity validator prevented submission");
+  } 
+  if (paymentOptions.value === 'credit card') {
+    if (!ccNumberValidator()) {
+      e.preventDefault();
+      console.log("CC validator prevented submission");
+    } 
+    if (!ccZipValidator()) {
+      e.preventDefault();
+      console.log("ZIP validator prevented submission");
+    } 
+    if (!ccCvvValidator()) {
+      e.preventDefault();
+      console.log("CVV validator prevented submission");
+    } 
+  }
+});
 
 //Default color choice so it resets the field
 ColorChoice('Select Theme');

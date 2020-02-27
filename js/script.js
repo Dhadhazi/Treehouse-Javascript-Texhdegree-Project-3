@@ -84,7 +84,7 @@ for (let i=0; i<checkboxes.length;i++) {
     const clickedCost = parseInt(clicked.getAttribute('data-cost'));
 
     for (let i=0; i<checkboxes.length;i++) {
-      checkboxTime = checkboxes[i].getAttribute('data-day-and-time');
+      const checkboxTime = checkboxes[i].getAttribute('data-day-and-time');
       if (clickedTime === checkboxTime && checkboxes[i] !== clicked) {
         if (clicked.checked) {
           checkboxes[i].disabled = 'true';
@@ -118,7 +118,7 @@ function pay (paymentMethod) {
 
   //Deletiing the select option
   const selectPayment = document.querySelector('option[value="select method"]');
-  if (selectPayment) {paymentOptions.removeChild(selectPayment)};
+  if (selectPayment) {paymentOptions.removeChild(selectPayment)}
 
   if (paymentMethod === 'credit card') {
     creditcard.style.display = '';
@@ -132,7 +132,7 @@ function pay (paymentMethod) {
     creditcard.style.display = 'none';
     paypal.style.display = 'none';
     bitcoin.style.display = '';
-  };
+  }
 
 }
 
@@ -148,7 +148,7 @@ function nameValidator() {
     name.style.borderColor ='';
     return(true);
   } else {
-  	name.style.borderColor ='red';
+    name.style.borderColor ='red';
     return(false);
   }
 }
@@ -157,12 +157,12 @@ function emailValidator() {
   const email = document.getElementById('mail');
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (re.test(email.value)){
-  	email.style.borderColor ='';
-  	return(true);
+    email.style.borderColor ='';
+    return(true);
   } else {
-  	email.style.borderColor ='red';
-  	return(false);
-  };
+    email.style.borderColor ='red';
+    return(false);
+  }
 }
 
 function activitiValidator(){
@@ -174,11 +174,11 @@ function activitiValidator(){
     }
   }
   if (status){
-  	errorBox.style.display = 'none';
-  	return(true);
+    errorBox.style.display = 'none';
+    return(true);
   } else {
     errorBox.style.display = '';
-  	return(false);
+    return(false);
   }
 }
 
@@ -186,24 +186,24 @@ function ccNumberValidator(){
   const ccNumber = document.getElementById('cc-num');
   const re = /^(\d){13,16}$/;
   if (re.test(ccNumber.value)){
-  	ccNumber.style.borderColor ='';
-  	return(true);
+    ccNumber.style.borderColor ='';
+    return(true);
   } else {
-  	ccNumber.style.borderColor ='red';
-  	return(false);
-  };
+    ccNumber.style.borderColor ='red';
+    return(false);
+  }
 }
 
 function ccZipValidator(){
   const zip = document.getElementById('zip');
   const re = /^(\d){5}$/;
   if (re.test(zip.value)){
-  	zip.style.borderColor ='';
-  	return(true);
+    zip.style.borderColor ='';
+    return(true);
   } else {
-  	zip.style.borderColor ='red';
-  	return(false);
-  };
+    zip.style.borderColor ='red';
+    return(false);
+  }
 
 }
 
@@ -211,12 +211,12 @@ function ccCvvValidator(){
   const cvv = document.getElementById('cvv');
   const re = /^(\d){3}$/;
   if (re.test(cvv.value)){
-  	cvv.style.borderColor ='';
-  	return(true);
+    cvv.style.borderColor ='';
+    return(true);
   } else {
-  	cvv.style.borderColor ='red';
-  	return(false);
-  };
+    cvv.style.borderColor ='red';
+    return(false);
+  }
 }
 
 //Form validation event listener

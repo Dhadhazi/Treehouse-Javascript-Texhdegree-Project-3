@@ -75,25 +75,35 @@
       </fieldset>
 
       <fieldset class="activities">
+
         <legend>Register for Activities</legend>
+          <div id="checkbox error" style='background-color: red; text-align: center; display: none'>You must choose and activity</div>
           <label>
             <input type="checkbox" name="all" data-cost="200"> Main Conference — $200
           </label>
           <label>
-            <input type="checkbox" name="js-frameworks" data-day-and-time="Tuesday 9am-12pm" data-cost="100"> 
-            JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100
+            <span>
+              <input type="checkbox" name="js-frameworks" data-day-and-time="Tuesday 9am-12pm" data-cost="100"> 
+              JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100
+            </span>
           </label>
           <label>
+            <span>
             <input type="checkbox" name="js-libs" data-day-and-time="Tuesday 1pm-4pm" data-cost="100">
             JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100
+            </span>
           </label> 
           <label>
+            <span>
             <input type="checkbox" name="express" data-day-and-time="Tuesday 9am-12pm" data-cost="100"> 
             Express Workshop — Tuesday 9am-12pm, $100
+            </span>
           </label>
           <label>
+            <span>
             <input type="checkbox" name="node" data-day-and-time="Tuesday 1pm-4pm" data-cost="100"> 
             Node.js Workshop — Tuesday 1pm-4pm, $100
+            </span>
           </label>          
           <label>
             <input type="checkbox" name="build-tools" data-day-and-time="Wednesday 9am-12pm" data-cost="100"> 

@@ -88,8 +88,12 @@ for (let i=0; i<checkboxes.length;i++) {
       if (clickedTime === checkboxTime && checkboxes[i] !== clicked) {
         if (clicked.checked) {
           checkboxes[i].disabled = 'true';
+          let parent = checkboxes[i].parentNode;
+          parent.style.color = 'grey';
         } else {
           checkboxes[i].disabled = ''; 
+          let parent = checkboxes[i].parentNode;
+          parent.style.color = '';
         }
       }
     }
@@ -141,8 +145,10 @@ paymentOptions.addEventListener('change', (e) => {
 function nameValidator() {
   const name = document.getElementById('name');
   if (name.value.length > 0) {
+    name.style.borderColor ='';
     return(true);
   } else {
+  	name.style.borderColor ='red';
     return(false);
   }
 }
@@ -150,35 +156,67 @@ function nameValidator() {
 function emailValidator() {
   const email = document.getElementById('mail');
   const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(email.value);
+  if (re.test(email.value)){
+  	email.style.borderColor ='';
+  	return(true);
+  } else {
+  	email.style.borderColor ='red';
+  	return(false);
+  };
 }
 
 function activitiValidator(){
   let status = false;
+  const errorBox = document.getElementById('checkbox error');
   for (let i=0; i<checkboxes.length; i++) {
     if (checkboxes[i].checked) {
       status = true;
     }
   }
-  return(status);
+  if (status){
+  	errorBox.style.display = 'none';
+  	return(true);
+  } else {
+    errorBox.style.display = '';
+  	return(false);
+  }
 }
 
 function ccNumberValidator(){
   const ccNumber = document.getElementById('cc-num');
   const re = /^(\d){13,16}$/;
-  return re.test(ccNumber.value);
+  if (re.test(ccNumber.value)){
+  	ccNumber.style.borderColor ='';
+  	return(true);
+  } else {
+  	ccNumber.style.borderColor ='red';
+  	return(false);
+  };
 }
 
 function ccZipValidator(){
   const zip = document.getElementById('zip');
   const re = /^(\d){5}$/;
-  return re.test(zip.value);
+  if (re.test(zip.value)){
+  	zip.style.borderColor ='';
+  	return(true);
+  } else {
+  	zip.style.borderColor ='red';
+  	return(false);
+  };
+
 }
 
 function ccCvvValidator(){
   const cvv = document.getElementById('cvv');
   const re = /^(\d){3}$/;
-  return re.test(cvv.value);
+  if (re.test(cvv.value)){
+  	cvv.style.borderColor ='';
+  	return(true);
+  } else {
+  	cvv.style.borderColor ='red';
+  	return(false);
+  };
 }
 
 //Form validation event listener
@@ -213,11 +251,13 @@ form.addEventListener('submit', (e) => {
   }
 });
 
+
 //Default color choice so it resets the field
 ColorChoice('Select Theme');
 
 //Default payment option choice
 pay('credit card');
+
 
 
 

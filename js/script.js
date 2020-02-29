@@ -20,6 +20,7 @@ jobrole.addEventListener('change', (e) => {
 //T-Shirt section
 const tshirtDesign = document.getElementById('design');
 
+
 //Handling color choosing from tshirtDesign event listener
 function ColorChoice(choice) {
   const tshirtColor = document.getElementById('color');
@@ -28,7 +29,7 @@ function ColorChoice(choice) {
   if (choice === 'Select Theme') { 
     for (let i=0; i<tshirtColorOptions.length; i++) {
       tshirtColorOptions[i].hidden = 'true';
-      tshirtColorOptions[i].selected = '';
+      tshirtColorOptions[i].removeAttribute('selected');
     }
     let tshirtNoDesign = document.createElement('option');
     tshirtNoDesign.appendChild(document.createTextNode('Please select a T-shirt theme'));
@@ -36,27 +37,29 @@ function ColorChoice(choice) {
     tshirtNoDesign.selected = 'true';
     tshirtColor.appendChild(tshirtNoDesign);
   } else if (choice === 'js puns') {
-    tshirtColorOptions[0].selected = 'true';
+  	tshirtDesign[0].hidden = true;
     for (let i=0; i<tshirtColorOptions.length; i++) {
       if (i>2) {
         tshirtColorOptions[i].hidden = 'true';
-        tshirtColorOptions[i].selected = '';
+        tshirtColorOptions[i].removeAttribute('selected');
       } else {
         tshirtColorOptions[i].hidden = '';
-        tshirtColorOptions[i].selected = '';
+        tshirtColorOptions[i].removeAttribute('selected');
       }
+    tshirtColorOptions[0].selected = 'true';
     }
 
   } else if (choice === 'heart js') {
-    tshirtColorOptions[3].selected = 'true';
+  	tshirtDesign[0].hidden = true;
     for (let i=0; i<tshirtColorOptions.length; i++) {
       if (i<3 || i>5) {
         tshirtColorOptions[i].hidden = 'true';
-        tshirtColorOptions[i].selected = '';
+        tshirtColorOptions[i].removeAttribute('selected');
       } else {
         tshirtColorOptions[i].hidden = '';
-        tshirtColorOptions[i].selected = '';
+        tshirtColorOptions[i].removeAttribute('selected');
       }
+    tshirtColorOptions[3].selected = 'true';
     }
   }
 }
